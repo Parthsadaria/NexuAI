@@ -28,10 +28,7 @@ KaamChorGPT is an AI-powered assistant capable of performing various tasks on yo
 For any issues or suggestions, please open an issue on GitHub. 🛠️
 
 ## Contributing
-Contributions are welcome! Check out the [contribution guidelines](CONTRIBUTING.md) for more information. 🙌
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details. 📄
+Contributions are welcome 🙌
 
 ## Acknowledgements
 This project was made possible using [GPT-4-Free](https://github.com/xtekky/gpt4free/tree/main?tab=readme-ov-file). 🎉
