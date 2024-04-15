@@ -8,7 +8,13 @@ KaamChorGPT is an AI-powered assistant capable of performing various tasks on yo
 - **Application Management**: Open or close applications on your computer with simple voice commands. 📂
 - **Mouse Control**: Move the mouse cursor in any direction using voice commands. 🖱️
 - **Script Generation**: Generate Python scripts using GPT-3.5 AI to automate tasks. 🤖
-
+## Dependencies
+- pygame==2.1.0
+- speechrecognition==3.8.1
+- gtts==2.3.2
+- pyautogui==0.10.1
+- openai==0.12.6
+- g4f 
 ## Getting Started
 1. Clone the repository.
 2. Install the required dependencies by running `pip install -r requirements.txt`.
