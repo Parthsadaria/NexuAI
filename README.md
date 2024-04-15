@@ -1,8 +1,8 @@
 # 🤖 KaamChorGPT By Parth Sadaria
-
 KaamChorGPT is an AI-powered assistant capable of performing various tasks on your computer. Whether you want to open applications,Send Email,And Do Simple Tasks... KaamChorGPT is here to help. 🚀
 
 ## KaamChorGPT is Still in A Young Stage So it is Quite Dumb For Now :-) 👀
+## **(Totally Free 🥹🤝🏼)**
 ## Features
 - **Voice and Text Input**: Interact with KaamChorGPT using either speech 🗣️ or text input. 📝
 - **Application Management**: Open or close applications on your computer with simple voice commands. 📂
