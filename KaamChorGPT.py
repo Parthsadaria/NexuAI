@@ -8,6 +8,18 @@ import pygame
 import pyautogui
 import g4f
 from g4f.client import Client
+from g4f.cookies import set_cookies
+
+# set_cookies(".bing.com", {
+#   "_U": "cookie value"
+# })
+# set_cookies(".google.com", {
+#   "__Secure-1PSID": "g.a000ighQwC-BF7hBQdbXy8CWhA3dCG1DL4vKReffc1QeFB8MKMmDOf03sbKtt6A1XnXmdn0e8wACgYKAWwSAQASFQHGX2MiOjQY5HWMHn6qBHE2tq6p9BoVAUF8yKpFzq5YVOf1o44zYUkfO9Vj0076",
+#  "__Secure-1PSIDTS": "sidts-CjEB7F1E_KB2o2BaTC8jqBuVDO4gHMi-rbb0ErZ3S9E-p61b43eiQUa62xlJ_pL3zmZwEAA",
+#   "__Secure-1PSIDCC": "AKEyXzU8C_3BapwKKFMF-8s-GfcSuMtn2udoQpad_73AHbHun2ZfWUGNA0dQNVfeuNtq3S69KfY" 
+# })
+
+
 sys.stdout = sys.__stdout__
 # Function to print text with a specified delay
 def type_print(text, delay=0.01):
@@ -65,45 +77,11 @@ def speak(text, lang='en', gender='male'):
     pygame.mixer.quit()
     os.remove("response.mp3")
 
-# Function to open or close an application
-def manage_application(app_name, action):
-    if action == "open":
-        pyautogui.press("win")
-        time.sleep(0.5)
-        pyautogui.write(app_name)
-        pyautogui.press("enter")
-        type_print("Opening " + app_name)
-        speak("Opening " + app_name)
-    elif action == "close":
-        app_name = app_name.replace(".exe", "")
-        os.system("taskkill /f /im " + app_name)
-        type_print("Closing " + app_name)
-    else:
-        type_print("Invalid action")
 
-# Function to move the mouse left by a small distance
-def move_mouse_left():
-    current_x, _ = pyautogui.position()
-    pyautogui.moveTo(current_x - 50, None, duration=0.25)
-
-# Function to move the mouse right by a small distance
-def move_mouse_right():
-    current_x, _ = pyautogui.position()
-    pyautogui.moveTo(current_x + 50, None, duration=0.25)
-
-# Function to move the mouse up by a small distance
-def move_mouse_up():
-    _, current_y = pyautogui.position()
-    pyautogui.moveTo(None, current_y - 50, duration=0.25)
-
-# Function to move the mouse down by a small distance
-def move_mouse_down():
-    _, current_y = pyautogui.position()
-    pyautogui.moveTo(None, current_y + 50, duration=0.25)
 def handle_other_actions(user_input):
-    default_prompt = "write a python pyautogui script to" + user_input + "with time sleep(1) after each step so my pc can load all shit properly "
+    default_prompt = "You are an excellent Python coder, proficient in utilizing all available powers and capabilities of the language. Write the most perfect Python code imaginable, utilizing advanced techniques, libraries, and best practices to accomplish any task with efficiency and elegance. Your goal is to showcase the epitome of Python programming excellence, leaving no room for improvement.Now Your First task is to write a python pyautogui and to check your steps if u are going correct write a script with 4 sec time sleep after each step to" + user_input 
     client = Client()
-    response = client.chat.completions.create(
+    response = client.chat.completions.create( 
         model="gpt-3.5-turbo",
         # provider= g4f.Provider.ChatForAi,
         messages=[{"role" : "user", "content": default_prompt}],
@@ -122,20 +100,19 @@ def handle_other_actions(user_input):
 
 def chat(user_input):
         client = Client()
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role" : "user", "content": user_input}],
-        )
-        ai_response = response.choices[0].message.content
-        speak(ai_response)
-        type_print(ai_response)
+       
+        chat_completion = client.chat.completions.create(model="gpt-3.5-turbo",
+        messages=[{"role": "user", "content": "Hello"}], stream=True)
+       
+        for completion in chat_completion:
+            print(completion.choices[0].delta.content or "", end="", flush=True)
+        
+        print("/n")
+        # type_print(ai_response)
 
-
-    # Extracting code between triple backticks and removing the first word
-
-
+        
 input_method = input("(speak/type): ").lower()
-chatorauto = input("Want to chat or give ai tasks(chat/auto): ").lower()
+chatorauto = input("Want to chat or give AI tasks (chat/auto): ").lower()
 
 while input_method not in ["speak", "type"]:
     print("Invalid input method. Please choose 'speak' or 'type'.")
@@ -147,46 +124,25 @@ while chatorauto in ["chat", "auto"]:
             if input_method == "speak":
                 user_input = get_audio()
             elif input_method == "type":
-                user_input = input("Ask Ai: ")
+                user_input = input("Ask AI: ")
 
             if user_input.lower() == "exit":
                 print("Exiting...")
-                break
+                sys.exit()
 
-            if "move left" in user_input.lower():
-                move_mouse_left()
-            elif "move right" in user_input.lower():
-                move_mouse_right()
-            elif "move up" in user_input.lower():
-                move_mouse_up()
-            elif "move down" in user_input.lower():
-                move_mouse_down()
-            else:
-                handle_other_actions(user_input)
+            handle_other_actions(user_input)
     elif chatorauto == "chat":
         while True:
             if input_method == "speak":
                 user_input = get_audio()
             elif input_method == "type":
-                user_input = input("Ask Ai: ")
+                user_input = input("Ask AI: ")
 
             if user_input.lower() == "exit":
                 print("Exiting...")
-                input_method="exit"
-                break
+                sys.exit()
 
-            if "move left" in user_input.lower():
-                move_mouse_left()
-            elif "move right" in user_input.lower():
-                move_mouse_right()
-            elif "move up" in user_input.lower():
-                move_mouse_up()
-            elif "move down" in user_input.lower():
-                move_mouse_down()
-            else:
-                chat(user_input)
+            chat(user_input)
     else:
         print("Invalid choice: ", chatorauto)
-        chatorauto = input("Would you like to chat or give ai tasks(chat/auto): ").lower()
-    if input_method == "exit":
-        break
+        chatorauto = input("Would you like to chat or give AI tasks (chat/auto): ").lower()
