@@ -10,14 +10,7 @@ import g4f
 from g4f.client import Client
 from g4f.cookies import set_cookies
 
-# set_cookies(".bing.com", {
-#   "_U": "cookie value"
-# })
-# set_cookies(".google.com", {
-#   "__Secure-1PSID": "g.a000ighQwC-BF7hBQdbXy8CWhA3dCG1DL4vKReffc1QeFB8MKMmDOf03sbKtt6A1XnXmdn0e8wACgYKAWwSAQASFQHGX2MiOjQY5HWMHn6qBHE2tq6p9BoVAUF8yKpFzq5YVOf1o44zYUkfO9Vj0076",
-#  "__Secure-1PSIDTS": "sidts-CjEB7F1E_KB2o2BaTC8jqBuVDO4gHMi-rbb0ErZ3S9E-p61b43eiQUa62xlJ_pL3zmZwEAA",
-#   "__Secure-1PSIDCC": "AKEyXzU8C_3BapwKKFMF-8s-GfcSuMtn2udoQpad_73AHbHun2ZfWUGNA0dQNVfeuNtq3S69KfY" 
-# })
+
 
 
 sys.stdout = sys.__stdout__
