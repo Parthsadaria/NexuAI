@@ -1,18 +1,14 @@
 import os
 import sys
-sys.stdout = open(os.devnull, 'w')
 import time
+sys.stdout = open(os.devnull, 'w')
 import speech_recognition as sr
 from gtts import gTTS
 import pygame
-import pyautogui
 import g4f
 from g4f.client import Client
-from g4f.cookies import set_cookies
-
-
-
-
+import asyncio
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 sys.stdout = sys.__stdout__
 # Function to print text with a specified delay
 def type_print(text, delay=0.01):
@@ -20,42 +16,36 @@ def type_print(text, delay=0.01):
         print(char, end='', flush=True)
         time.sleep(delay)
     print()
+
 type_print("~~~~~~~~~~~KaamChorGPT By Parth Sadaria~~~~~~~~~~~")
+
 # Function to get audio input from the user
 def get_audio():
-    while True:
-        recognizer = sr.Recognizer()
-        with sr.Microphone() as source:
-            print("Adjusting for ambient noise. Please wait...")
-            recognizer.adjust_for_ambient_noise(source)
-            print("Listening...")
-            audio = recognizer.listen(source)
-        try:
-            print("Recognizing...")
-            user_input = recognizer.recognize_google(audio)
-            print("You said:", user_input)
-            return user_input
-        except sr.UnknownValueError:
-            print("Sorry, I didn't catch that. Please try again.")
-        except sr.RequestError:
-            print("Sorry, I couldn't request results. Please check your internet connection.")
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Adjusting for ambient noise. Please wait...")
+        recognizer.adjust_for_ambient_noise(source)
+        print("Listening...")
+        audio = recognizer.listen(source)
+    try:
+        print("Recognizing...")
+        user_input = recognizer.recognize_google(audio)
+        print("You said:", user_input)
+        return user_input
+    except sr.UnknownValueError:
+        print("Sorry, I didn't catch that. Please try again.")
+        return None
+    except sr.RequestError:
+        print("Sorry, I couldn't request results. Please check your internet connection.")
+        return None
 
-# Function to speak text
-# Function to speak text
 # Function to speak text with a specific voice
 def speak(text, lang='en', gender='male'):
+    lang_code = 'en'
     if lang == 'en':
-        if gender == 'male':
-            lang_code = 'en-us'
-        elif gender == 'female':
-            lang_code = 'en-uk'
+        lang_code = 'en-us' if gender == 'male' else 'en-uk'
     elif lang == 'es':
-        if gender == 'male':
-            lang_code = 'es-es'
-        elif gender == 'female':
-            lang_code = 'es-la'
-    else:
-        lang_code = 'en-us'  # Default to English male voice
+        lang_code = 'es-es' if gender == 'male' else 'es-la'
 
     tts = gTTS(text=text, lang=lang_code, slow=False)
     tts.save("response.mp3")
@@ -71,71 +61,104 @@ def speak(text, lang='en', gender='male'):
     os.remove("response.mp3")
 
 
-def handle_other_actions(user_input):
-    default_prompt = "You are an excellent Python coder, proficient in utilizing all available powers and capabilities of the language. Write the most perfect Python code imaginable, utilizing advanced techniques, libraries, and best practices to accomplish any task with efficiency and elegance. Your goal is to showcase the epitome of Python programming excellence, leaving no room for improvement.Now Your First task is to write a python pyautogui and to check your steps if u are going correct write a script with 4 sec time sleep after each step to" + user_input 
-    client = Client()
-    response = client.chat.completions.create( 
+# Function to handle other actions based on user input
+# Function to handle other actions based on user input
+def handle_other_actions(user_input, history):
+    formatted_history = format_history(history)
+    default_prompt = (f"Write a Python pyautogui script and to check your steps. If "
+                      f"you are going correctly , write a & no comments & also write python at start of each script with a 2-second time sleep after each step to User:-{user_input}. "
+                      f"Here is the conversation history for your reference:\n\n{formatted_history}\n\nNow you have to continue this convo.")
+
+    client = Client(
+    provider = 	g4f.Provider.You
+    )
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
-        # provider= g4f.Provider.ChatForAi,
-        messages=[{"role" : "user", "content": default_prompt}],
+        messages=[{"role": "user", "content": default_prompt}],
     )
     ai_response = response.choices[0].message.content
+    
     code_start = ai_response.find("```")
     code_end = ai_response.rfind("```")
+    
     if code_start != -1 and code_end != -1 and code_end > code_start:
-        code = ai_response[code_start + 3:code_end].split(maxsplit=1)[1]
+        code_block = ai_response[code_start + 3:code_end].strip()
+        code_lines = code_block.split('\n')
+        if code_lines and code_lines[0].strip().startswith("python"):
+            code_lines[0] = ' '.join(code_lines[0].split()[1:])  # Remove the first word if it is "python"
+        new_code_block = "\n".join(code_lines)
+        ai_response = ai_response[:code_start + 3] + new_code_block + ai_response[code_end:]
         try:
-            exec(code)
+            exec(new_code_block)
         except Exception as e:
             print("Error executing generated code:", e)
     else:
-        exec(ai_response)
+        print(ai_response)
 
-def chat(user_input):
-        client = Client()
-       
-        chat_completion = client.chat.completions.create(model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": "Hello"}], stream=True)
-       
-        for completion in chat_completion:
-            print(completion.choices[0].delta.content or "", end="", flush=True)
-        
-        print("/n")
-        # type_print(ai_response)
+    history.append({"role": "assistant", "content": ai_response})
 
-        
-input_method = input("(speak/type): ").lower()
-chatorauto = input("Want to chat or give AI tasks (chat/auto): ").lower()
 
-while input_method not in ["speak", "type"]:
-    print("Invalid input method. Please choose 'speak' or 'type'.")
+
+# Function to handle chat interactions
+def chat(user_input, history):
+    formatted_history = format_history(history)
+    prompt = f"History '{formatted_history}'\n\n Now respond to this in shortest way possible (and also the right way)AND A REMINDER THAT U R NOT META AI UR KAAMCHORGPT BY PARTH SADARIA \n User:-"
+
+    client = Client(	g4f.Provider.MetaAI
+    )
+    messages = [{"role": "user", "content": prompt+user_input}]
+    chat_completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=messages, stream=True)
+
+    for completion in chat_completion:
+        response = completion.choices[0].delta.content or ""
+        print(response, end="", flush=True)
+    print("\n")
+
+    history.append({"role": "user", "content": user_input})
+    history.append({"role": "assistant", "content": response})
+
+# Function to format the chat history
+def format_history(history):
+    formatted = ""
+    for entry in history:
+        if entry["role"] == "user":
+            formatted += f"User:- {entry['content']}\n"
+        else:
+            formatted += f"Ai:- {entry['content']}\n"
+    return formatted
+
+# Main program loop
+def main():
     input_method = input("Would you like to speak or type your input? (speak/type): ").lower()
+    while input_method not in ["speak", "type"]:
+        print("Invalid input method. Please choose 'speak' or 'type'.")
+        input_method = input("Would you like to speak or type your input? (speak/type): ").lower()
 
-while chatorauto in ["chat", "auto"]:
-    if chatorauto == "auto":
-        while True:
-            if input_method == "speak":
-                user_input = get_audio()
-            elif input_method == "type":
-                user_input = input("Ask AI: ")
+    chatorauto = input("Would you like to chat or give AI tasks? (chat/auto): ").lower()
+    while chatorauto not in ["chat", "auto"]:
+        print("Invalid choice. Please choose 'chat' or 'auto'.")
+        chatorauto = input("Would you like to chat or give AI tasks? (chat/auto): ").lower()
 
-            if user_input.lower() == "exit":
-                print("Exiting...")
-                sys.exit()
+    history = []
 
-            handle_other_actions(user_input)
-    elif chatorauto == "chat":
-        while True:
-            if input_method == "speak":
-                user_input = get_audio()
-            elif input_method == "type":
-                user_input = input("Ask AI: ")
+    while True:
+        if input_method == "speak":
+            user_input = get_audio()
+            if not user_input:
+                continue
+        else:
+            user_input = input("Ask AI: ")
 
-            if user_input.lower() == "exit":
-                print("Exiting...")
-                sys.exit()
+        if user_input.lower() == "exit":
+            print("Exiting...")
+            break
 
-            chat(user_input)
-    else:
-        print("Invalid choice: ", chatorauto)
-        chatorauto = input("Would you like to chat or give AI tasks (chat/auto): ").lower()
+        if chatorauto == "auto":
+            handle_other_actions(user_input, history)
+        else:
+            chat(user_input, history)
+
+if __name__ == "__main__":
+    main()
