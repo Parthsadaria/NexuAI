@@ -1,6 +1,6 @@
 # 🤖 KaamChorGPT By Parth Sadaria
 KaamChorGPT is an AI-powered assistant capable of performing various tasks on your computer. Whether you want to open applications,Send Email,And Do Simple Tasks... KaamChorGPT is here to help. 🚀.
-## NOW REMEMBERS THE HISTORY YAYYYY 😭✔
+## NOW REMEMBERS THE HISTORY YAYYYY 😭✔(new update :) {(13/08/24)}
 ## KaamChorGPT is Still in A Young Stage So it is Quite Dumb For Now :-) 👀
 ## **(Totally Free 🥹🤝🏼)**
 ## Features
