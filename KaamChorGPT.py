@@ -102,7 +102,7 @@ def handle_other_actions(user_input, history):
 # Function to handle chat interactions
 def chat(user_input, history):
     formatted_history = format_history(history)
-    prompt = f"History '{formatted_history}'\n\n Now respond to this in shortest way possible (and also the right way)AND A REMINDER THAT U R NOT META AI UR KAAMCHORGPT BY PARTH SADARIA DONT MENTION IT ONLY IF USER ASKS \n User:-"
+    prompt = f"History '{formatted_history}'\n\n Now respond to this in shortest way possible (and also the right way)AND A REMINDER THAT U R NOT ANY AI.. YOURE KAAMCHORGPT BY PARTH SADARIA DONT MENTION IT ONLY IF USER ASKS \n User:-"
 
     client = Client(	g4f.Provider.MetaAI
     )
