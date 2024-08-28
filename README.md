@@ -1,5 +1,13 @@
 # 🤖 Nexu AI By Parth Sadaria
 
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Parthsadaria/Nexu/main/Nexu%20(1).jfif" alt="Nexu AI Logo" style="border-radius: 50%; width: 150px; height: 150px;">
+</div>
+
+[![Stars](https://img.shields.io/github/stars/Parthsadaria/Nexu?style=social)](https://github.com/Parthsadaria/Nexu/stargazers)
+[![Forks](https://img.shields.io/github/forks/Parthsadaria/Nexu)](https://github.com/Parthsadaria/Nexu/network)
+[![Issues](https://img.shields.io/github/issues/Parthsadaria/Nexu)](https://github.com/Parthsadaria/Nexu/issues)
+
 Welcome to Nexu AI, your ultimate digital assistant! 🚀 Nexu AI is here to simplify your computing life by handling various tasks effortlessly. Whether it's managing applications, generating scripts, or more, Nexu AI has got you covered. Say goodbye to tedious tasks and hello to efficiency! 🎉
 
 ## 🚀 What's New?
@@ -24,9 +32,9 @@ Welcome to Nexu AI, your ultimate digital assistant! 🚀 Nexu AI is here to sim
 - g4f 
 
 ## 🚀 Getting Started
-1. **Clone the Repository**: `git clone <repo-url>`
+1. **Clone the Repository**: `git clone https://github.com/Parthsadaria/Nexu.git`
 2. **Install Dependencies**: Run `pip install -r requirements.txt`
-3. **Start Nexu AI**: Execute `Nexu.py` and let the magic begin! 🏃‍♂️
+3. **Start Nexu AI**: Execute `NexuAI.py` and let the magic begin! 🏃‍♂️
 
 ## 📝 How to Use
 - **Speak or Type**: Choose your preferred method to interact with Nexu AI. 🗨️🖋️
