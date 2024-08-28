@@ -1,11 +1,27 @@
 # 🤖 Nexu AI By Parth Sadaria
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Parthsadaria/Nexu/main/Nexu%20(1).jfif" alt="Nexu AI Logo" style="border:2px solid wheat; border-radius: 50%; width: 150px; height: 150px;">
-  </div>
-[![Stars](https://img.shields.io/github/stars/Parthsadaria/Nexu?style=social)](https://github.com/Parthsadaria/Nexu/stargazers)
-[![Forks](https://img.shields.io/github/forks/Parthsadaria/Nexu)](https://github.com/Parthsadaria/Nexu/network)
-[![Issues](https://img.shields.io/github/issues/Parthsadaria/Nexu)](https://github.com/Parthsadaria/Nexu/issues)
+  <img src="https://raw.githubusercontent.com/Parthsadaria/Nexu/main/Nexu%20(1).jfif" alt="Nexu AI Logo" width="150" height="150">
+  
+  <!-- Badges -->
+  <p>
+    <a href="https://github.com/Parthsadaria/Nexu/stargazers">
+      <img src="https://img.shields.io/github/stars/Parthsadaria/Nexu?style=social" alt="GitHub Stars">
+    </a>
+    <a href="https://github.com/Parthsadaria/Nexu/network/members">
+      <img src="https://img.shields.io/github/forks/Parthsadaria/Nexu" alt="GitHub Forks">
+    </a>
+    <a href="https://github.com/Parthsadaria/Nexu/issues">
+      <img src="https://img.shields.io/github/issues/Parthsadaria/Nexu" alt="GitHub Issues">
+    </a>
+    <a href="https://github.com/Parthsadaria/Nexu/blob/main/LICENSE">
+      <img src="https://img.shields.io/github/license/Parthsadaria/Nexu" alt="GitHub License">
+    </a>
+    <a href="https://github.com/Parthsadaria/Nexu/commits/main">
+      <img src="https://img.shields.io/github/commit-activity/m/Parthsadaria/Nexu" alt="GitHub Commit Activity">
+    </a>
+  </p>
+</div>
 
 Welcome to Nexu AI, your ultimate digital assistant! 🚀 Nexu AI is here to simplify your computing life by handling various tasks effortlessly. Whether it's managing applications, generating scripts, or more, Nexu AI has got you covered. Say goodbye to tedious tasks and hello to efficiency! 🎉
 
