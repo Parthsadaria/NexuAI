@@ -26,7 +26,8 @@
 Welcome to Nexu AI, your ultimate digital assistant! 🚀 Nexu AI is here to simplify your computing life by handling various tasks effortlessly. Whether it's managing applications, generating scripts, or more, Nexu AI has got you covered. Say goodbye to tedious tasks and hello to efficiency! 🎉
 
 ## 🚀 What's New?
-- **Enhanced Memory**: Nexu AI now remembers your history to serve you better! 🧠✔ (new update :) {(13/08/24)}
+- **Image Generation**:- Use simple keywords like "imagine" before your prompt to generate an image 😎 (29-08-24)
+- **Enhanced Memory**: Nexu AI now remembers your history to serve you better! 🧠✔ (new update :) (13-08-24)
 - **Still Learning**: We're in the early stages, so expect a few quirks. 😅
 
 ## 🆓 **Totally Free!** 🥹🤝🏼
