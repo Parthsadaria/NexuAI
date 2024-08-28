@@ -26,7 +26,7 @@ Welcome to Nexu AI, your ultimate digital assistant! 🚀 Nexu AI is here to sim
 ## 🚀 Getting Started
 1. **Clone the Repository**: `git clone <repo-url>`
 2. **Install Dependencies**: Run `pip install -r requirements.txt`
-3. **Start Nexu AI**: Execute `NexuAI.py` and let the magic begin! 🏃‍♂️
+3. **Start Nexu AI**: Execute `Nexu.py` and let the magic begin! 🏃‍♂️
 
 ## 📝 How to Use
 - **Speak or Type**: Choose your preferred method to interact with Nexu AI. 🗨️🖋️
