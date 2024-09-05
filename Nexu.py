@@ -19,7 +19,7 @@ def type_print(text, delay=0.01):
         time.sleep(delay)
     print()
 
-def hacker_intro_effect(text, delay=0.1, iterations=10):
+def intro(text, delay=0.1, iterations=10):
     chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     
     def random_char():
@@ -144,15 +144,16 @@ def chat(user_input, history):
     formatted_history = format_history(history)
     prompt = f"conversation history '{formatted_history}'\n\n Now respond to this in shortest way possible (and also the right way)AND A REMINDER THAT U R NOT ANY SIMPLE AI.... UR NEXU.AI BY PARTH SADARIA WHICH IS THE SMARTEST AI IN WORLD DONT MENTION IT ONLY IF USER ASKS AND ALSO DONT MENTION HISTORY JUST REMEMBER IT AND DONT SAY ANYTHING ABOUT IT\n User:-"
 
-    client = Client(g4f.Provider.MetaAI)
+    client = Client(g4f.Provider.Blackbox)
     messages = [{"role": "user", "content": prompt+user_input}]
     chat_completion = client.chat.completions.create(
-        model="",
+        model="blackbox",
         messages=messages, stream=True)
 
     for completion in chat_completion:
         response = completion.choices[0].delta.content or ""
-        print(f"\033[1;34m{response}\033[0m", end="", flush=True)
+        print(f"\033[1;36m{response}\033[0m", end="", flush=True)
+    print("")
 
     history.append({"role": "user", "content": user_input})
     history.append({"role": "assistant", "content": response})
@@ -168,7 +169,7 @@ def format_history(history):
     return formatted
 
 def main():
-    hacker_intro_effect("~~~NexuAI by Parth Sadaria~~", delay=0.00001, iterations=5)
+    intro("~~~NexuAI by Parth Sadaria~~", delay=0.00001, iterations=5)
     input_method = input("Would you like to speak or type your input? (speak/type): ").lower()
     while input_method not in ["speak", "type"]:
         print("Invalid input method. Please choose 'speak' or 'type'.")
