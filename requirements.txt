@@ -5,3 +5,4 @@ gtts
 pyautogui
 openai
 g4f
+curl
