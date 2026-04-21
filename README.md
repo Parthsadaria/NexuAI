@@ -1,3 +1,11 @@
+## 🚀 Project Status
+
+Nexu AI was one of my early experiments in building a voice-enabled AI assistant with automation capabilities. It explored speech recognition, text-to-speech, AI integration, and system automation in Python.
+
+This project is no longer actively maintained.
+
+It helped me learn a lot about real-world application building, and I may revisit the idea in a more refined and scalable version in the future. 👀
+
 # 🤖 Nexu AI By Parth Sadaria
 
 <div align="center">
